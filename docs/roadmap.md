@@ -9,6 +9,7 @@ Where the platform is headed. Organized by horizon, not hard dates. Honest about
 ## Guiding principles
 
 - **Local-first, $0 by default.** Cloud is an escape hatch, not the default.
+- **Prefer free/local models whenever possible.** Casual chat and simple tasks → local or free `cloud-or`. Spend on paid `cloud-smart` only where it's genuinely required — reliable tool-calling (integrations), or quality-critical work. Default to the cheapest model that can do the job.
 - **Files are memory.** Durable context lives on disk (`CLAUDE.md`, `USER.md`, memory files) — sessions are ephemeral.
 - **Confirm before destructive/outward actions.** Bold internally, careful externally.
 - **Hardware is the real ceiling.** On 16 GB, software tuning has limits — don't fight physics.
@@ -75,6 +76,24 @@ What separates a companion you *talk to* from one that *acts for you* — and th
 - **Selective enable = cost control.** Each skill adds ~100–200 tokens/message. The companion was trimmed to `messaging` for cost; re-add only the integrations you'll actually use, not all 29.
 - **Auth per integration** lives in `~/.openclaw/openclaw.json` / env — treat as secrets, keep out of git.
 - **`clawhub` is disabled** (`plugins.allow` excludes it); re-enable it to install new skills (e.g. Google Calendar, Slack).
+
+### Setup status & pending (as of Oct 2026)
+Scoped-exec groundwork is **done**; the rest is picked up later.
+
+| Item | Status | Pick-up step |
+|---|---|---|
+| Scoped exec policy (`security=allowlist` + `ask=on-miss`) | ✅ done | — (safety upgrade from wide-open `full/off`) |
+| `exec` enabled on companion (bounded, allowlist `gh`+`himalaya`) | ✅ done | — |
+| **GitHub** | 🔜 reachable | First WhatsApp use → `/approve <id> allow-always` to enroll `gh` |
+| **Email (Gmail / himalaya)** | 🔜 | Generate Gmail **App Password** → write `~/.config/himalaya/config.toml` |
+| **Google Calendar** | 🧭 gap | Re-enable `clawhub` + install/build a calendar skill (Google OAuth, production mode) |
+| **Slack** | 🧭 | `slack` skill + bot token (xoxb-…) |
+| Anthropic spend cap | 🔜 | Set at console.anthropic.com (more important now the companion is ~16k tok/msg) |
+
+### Model economy (serves "use free when possible")
+Integrations currently force the companion onto **paid `cloud-smart`** (free `cloud-or` won't reliably call tools), and enabling `exec` pushed input back to ~16k tok/msg. To honor free-first:
+- **Exec is a toggle** — turn it *off* for lean, free/local chat (~7k tok); *on* only when you want the companion to act.
+- 🧭 **Explore capability-based routing:** companion chats on **local/free**, and escalates to `cloud-smart` *only* when a turn needs tool-calling/integration. Would give free-by-default with paid only on action.
 
 ---
 
