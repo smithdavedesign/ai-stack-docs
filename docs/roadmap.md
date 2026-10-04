@@ -55,6 +55,29 @@ All four were chosen as goals. Shared enabler: reliable tool-calling needs a **c
 
 ---
 
+## Integrations — the "runs my life" leap
+
+What separates a companion you *talk to* from one that *acts for you* — and the main thing Dot/Muse do that ours doesn't yet. Good news: **most targets already ship as OpenClaw skills** (installed, but trimmed out by the `messaging` profile). The work is *selectively enabling + authenticating* them on the companion — not building from scratch.
+
+| Target | OpenClaw skill | Access | Status | Notes |
+|---|---|---|---|---|
+| **GitHub** | `github`, `gh-issues` | read + write (confirm) | 🔜 ready | `gh` already authed (smithdavedesign) — just enable on companion |
+| **Email (Gmail)** | `himalaya` | read + send (confirm) | 🔜 | needs Gmail OAuth / app password |
+| **Notes** | `apple-notes`, `notion` | read / write | 🔜 ready | Notion key already configured |
+| **Reminders / tasks** | `apple-reminders`, `taskflow` | read / write | 🔜 ready | `taskflow-inbox-triage` for triage flows |
+| **Weather / places** | `weather`, `goplaces` | read | ✅ available | keys present |
+| **Messaging** | `wacli` (WhatsApp), `imsg` (iMessage) | read + send (confirm) | 🔜 | |
+| **Google Calendar** | — (not bundled) | read + create (confirm) | 🧭 build/install | enable `clawhub` to install a skill, or add one |
+| **Slack / Teams** | — | read + post (confirm) | 🧭 | what Dots use for work context — add if wanted |
+
+### Integration design rules
+- **Read freely, write on confirmation.** Reading inbox / calendar / notes is low-risk and bold; sending email, creating events, posting, or purchases always confirm first (per the companion's `SOUL.md` boundaries).
+- **Selective enable = cost control.** Each skill adds ~100–200 tokens/message. The companion was trimmed to `messaging` for cost; re-add only the integrations you'll actually use, not all 29.
+- **Auth per integration** lives in `~/.openclaw/openclaw.json` / env — treat as secrets, keep out of git.
+- **`clawhub` is disabled** (`plugins.allow` excludes it); re-enable it to install new skills (e.g. Google Calendar, Slack).
+
+---
+
 ## Later — conditional
 
 | Item | Status | Trigger |
