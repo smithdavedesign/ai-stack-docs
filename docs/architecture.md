@@ -64,10 +64,10 @@ sequenceDiagram
     H->>H: compress context (trim logs/history)
     H->>L: forward (OpenAI format, key sk-local-ai)
     L->>O: route to ollama_chat/qwen2.5:7b-coding
-    O-->>L: completion (warm: ~1-2s; cold: ~80s once)
+    O-->>L: completion (warm ~1-2s, cold ~80s once)
     L-->>H: response
     H-->>A: response
-    Note over L,O: On local error, LiteLLM retries<br/>cloud-or (free) → cloud-smart (paid)
+    Note over L,O: On local error, LiteLLM retries cloud-or (free) then cloud-smart (paid)
 ```
 
 ---
