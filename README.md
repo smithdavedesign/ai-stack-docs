@@ -88,6 +88,7 @@ flowchart TB
 | [Operations](docs/operations.md) | Runbook, health checks, reboot resilience, troubleshooting |
 | [Reference](docs/reference.md) | Ports, paths, models, secrets, external links |
 | [Roadmap](docs/roadmap.md) | Where it's headed — horizons, status, deliberate no's |
+| [Authentication](docs/authentication.md) | How each integration authenticates + staying logged in |
 
 ---
 
