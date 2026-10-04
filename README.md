@@ -87,6 +87,7 @@ flowchart TB
 | [Personal assistant](docs/personal-assistant.md) | Companion persona, memory, proactivity, channels, cost |
 | [Operations](docs/operations.md) | Runbook, health checks, reboot resilience, troubleshooting |
 | [Reference](docs/reference.md) | Ports, paths, models, secrets, external links |
+| [Roadmap](docs/roadmap.md) | Where it's headed — horizons, status, deliberate no's |
 
 ---
 
