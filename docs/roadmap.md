@@ -86,11 +86,12 @@ What separates a companion you *talk to* from one that *acts for you* — and th
 | Scoped exec policy + `exec` enabled | — | ✅ done | — |
 | **GitHub** (`gh`) | `gh` keyring | ✅ **verified** (as `smithdavedesign`) | Enroll via `/approve … allow-always` on first WhatsApp use |
 | **Notion** | `NOTION_API_KEY` | ✅ **verified** (workspace connected) | Same approval enrollment |
-| **Email (Gmail/himalaya)** | App Password | ⏳ config written (`~/.config/himalaya/config.toml`) | Paste Gmail **App Password** (file is open) |
+| **Gmail** | authorized Google connection | ✅ **verified** (read inbox) | Companion-native himalaya path optional (App Password in `~/.config/himalaya/config.toml`) |
 | **Apple Notes / Reminders** | — (local) | ✅ working | runs via osascript through gated exec; no secret |
-| **Google Calendar** (`gcalcli`) | Google OAuth | ✅ installed + wired | one-time `gcalcli init` (Google OAuth client + consent) |
-| **Slack** | bot token | ⏳ | configure `channels.slack` + `xoxb-…` token |
-| Anthropic spend cap | — | 🔜 | Set at console.anthropic.com |
+| **Calendar** | macOS/EventKit (`icalBuddy`) | ✅ **verified** | add-events via gated Calendar.app; Google syncs in via macOS Internet Accounts |
+| Anthropic spend cap | — | 🔜 | Set at console.anthropic.com (housekeeping, not an integration) |
+
+_Slack was not in the original ask (gmail/github/calendar/notes) — available as a future add via `channels.slack` + bot token._
 
 ### Model economy (serves "use free when possible")
 Integrations currently force the companion onto **paid `cloud-smart`** (free `cloud-or` won't reliably call tools), and enabling `exec` pushed input back to ~16k tok/msg. To honor free-first:
