@@ -77,18 +77,20 @@ What separates a companion you *talk to* from one that *acts for you* — and th
 - **Auth per integration** lives in `~/.openclaw/openclaw.json` / env — treat as secrets, keep out of git.
 - **`clawhub` is disabled** (`plugins.allow` excludes it); re-enable it to install new skills (e.g. Google Calendar, Slack).
 
-### Setup status & pending (as of Oct 2026)
-Scoped-exec groundwork is **done**; the rest is picked up later.
+### Setup status (as of Oct 2026)
 
-| Item | Status | Pick-up step |
-|---|---|---|
-| Scoped exec policy (`security=allowlist` + `ask=on-miss`) | ✅ done | — (safety upgrade from wide-open `full/off`) |
-| `exec` enabled on companion (bounded, allowlist `gh`+`himalaya`) | ✅ done | — |
-| **GitHub** | 🔜 reachable | First WhatsApp use → `/approve <id> allow-always` to enroll `gh` |
-| **Email (Gmail / himalaya)** | 🔜 | Generate Gmail **App Password** → write `~/.config/himalaya/config.toml` |
-| **Google Calendar** | 🧭 gap | Re-enable `clawhub` + install/build a calendar skill (Google OAuth, production mode) |
-| **Slack** | 🧭 | `slack` skill + bot token (xoxb-…) |
-| Anthropic spend cap | 🔜 | Set at console.anthropic.com (more important now the companion is ~16k tok/msg) |
+**Execution model (done):** all CLI/API integration skills run through the companion's `exec` tool, which is scoped: `tools.exec.security=allowlist` + `ask=on-miss`. Because OpenClaw's exec **shell-wraps** commands (`/bin/sh -c …`), binary-path allowlisting can't auto-match — so each new command **prompts for approval** on WhatsApp. Reply **`/approve <id> allow-always`** once per command and the system persists the correct rule (Dot/Muse-style). This gating is the intended security for an externally-reachable agent; CLI-driven approval isn't possible (must be the WhatsApp/gateway channel).
+
+| Integration | Credential | Status | Remaining |
+|---|---|---|---|
+| Scoped exec policy + `exec` enabled | — | ✅ done | — |
+| **GitHub** (`gh`) | `gh` keyring | ✅ **verified** (as `smithdavedesign`) | Enroll via `/approve … allow-always` on first WhatsApp use |
+| **Notion** | `NOTION_API_KEY` | ✅ **verified** (workspace connected) | Same approval enrollment |
+| **Email (Gmail/himalaya)** | App Password | ⏳ config written (`~/.config/himalaya/config.toml`) | Paste Gmail **App Password** (file is open) |
+| **Slack** | bot token | 🧭 | Configure `channels.slack` + `xoxb-…` token |
+| **Google Calendar** | Google OAuth | 🧭 gap | No bundled skill + `clawhub` installer unavailable → build a skill/MCP (OAuth production mode) |
+| **Apple Notes / Reminders** | — (local) | 🧭 | `osascript`-based → needs `osascript` allowlisted (broad; weigh the risk) |
+| Anthropic spend cap | — | 🔜 | Set at console.anthropic.com |
 
 ### Model economy (serves "use free when possible")
 Integrations currently force the companion onto **paid `cloud-smart`** (free `cloud-or` won't reliably call tools), and enabling `exec` pushed input back to ~16k tok/msg. To honor free-first:
