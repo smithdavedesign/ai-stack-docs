@@ -86,7 +86,7 @@ What separates a companion you *talk to* from one that *acts for you* — and th
 | Scoped exec policy + `exec` enabled | — | ✅ done | — |
 | **GitHub** (`gh`) | `gh` keyring | ✅ **verified** (as `smithdavedesign`) | Enroll via `/approve … allow-always` on first WhatsApp use |
 | **Notion** | `NOTION_API_KEY` | ✅ **verified** (workspace connected) | Same approval enrollment |
-| **Gmail** | authorized Google connection | ✅ **verified** (read inbox) | Companion-native himalaya path optional (App Password in `~/.config/himalaya/config.toml`) |
+| **Gmail** | App Password + authorized connection | ✅ **verified both paths** | companion-native himalaya live (inbox listed). _Gotcha: App Passwords copy with non-breaking spaces — strip all non-alphanumeric to 16 chars._ |
 | **Apple Notes / Reminders** | — (local) | ✅ working | runs via osascript through gated exec; no secret |
 | **Calendar** | macOS/EventKit (`icalBuddy`) | ✅ **verified** | add-events via gated Calendar.app; Google syncs in via macOS Internet Accounts |
 | Anthropic spend cap | — | 🔜 | Set at console.anthropic.com (housekeeping, not an integration) |
