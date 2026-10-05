@@ -87,9 +87,9 @@ What separates a companion you *talk to* from one that *acts for you* — and th
 | **GitHub** (`gh`) | `gh` keyring | ✅ **verified** (as `smithdavedesign`) | Enroll via `/approve … allow-always` on first WhatsApp use |
 | **Notion** | `NOTION_API_KEY` | ✅ **verified** (workspace connected) | Same approval enrollment |
 | **Email (Gmail/himalaya)** | App Password | ⏳ config written (`~/.config/himalaya/config.toml`) | Paste Gmail **App Password** (file is open) |
-| **Slack** | bot token | 🧭 | Configure `channels.slack` + `xoxb-…` token |
-| **Google Calendar** | Google OAuth | 🧭 gap | No bundled skill + `clawhub` installer unavailable → build a skill/MCP (OAuth production mode) |
-| **Apple Notes / Reminders** | — (local) | 🧭 | `osascript`-based → needs `osascript` allowlisted (broad; weigh the risk) |
+| **Apple Notes / Reminders** | — (local) | ✅ working | runs via osascript through gated exec; no secret |
+| **Google Calendar** (`gcalcli`) | Google OAuth | ✅ installed + wired | one-time `gcalcli init` (Google OAuth client + consent) |
+| **Slack** | bot token | ⏳ | configure `channels.slack` + `xoxb-…` token |
 | Anthropic spend cap | — | 🔜 | Set at console.anthropic.com |
 
 ### Model economy (serves "use free when possible")
