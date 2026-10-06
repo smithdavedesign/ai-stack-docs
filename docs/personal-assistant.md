@@ -37,15 +37,42 @@ Because memory is **file-based**, even scheduled/isolated runs stay in-character
 
 ---
 
+## Full agentic access ⚠️
+
+The companion runs with **full, ungated access** (owner's explicit choice): `tools.profile=coding`, `tools.exec.security=full`, `tools.exec.ask=off`. It can **write/edit files, run any shell command, and spawn coding sub-agents in any repo — unattended, no approval prompts.**
+
+- Documented for the agent in `~/.openclaw/workspace-companion/TOOLS.md`.
+- **Security boundaries (the only thing guarding this):** WhatsApp allowlisted to one number; gateway bound to **loopback** only.
+- **Risk:** it reads untrusted content (email/web) *and* has full exec → a prompt-injection could run code. Keep it off untrusted inboxes/pages. The `exec.security=full` flip must be set by the owner (the Claude Code classifier blocks assistants from ungating exec on an externally-reachable agent).
+- **History:** evolved from scoped exec (`security=allowlist` + `ask=on-miss`, per-command WhatsApp `/approve … allow-always`) → full access.
+
+## Integrations (live)
+
+The companion acts on real services via its CLIs/APIs. Read-only is free; it asks in plain language before irreversible/external actions.
+
+| Integration | How | Status |
+|---|---|---|
+| **GitHub** | `gh` CLI | ✅ `smithdavedesign` |
+| **Gmail** | `himalaya` (IMAP/SMTP, App Password) + authorized Google connection | ✅ inbox verified |
+| **Calendar** | `icalBuddy` reads macOS/EventKit calendars; Calendar.app to add | ✅ (Google syncs via macOS Internet Accounts) |
+| **Notes / Reminders** | osascript (local) | ✅ |
+| **Notion** | Notion API (`NOTION_API_KEY`) | ✅ workspace connected |
+
+See [authentication.md](authentication.md) for credential details and the non-breaking-space App Password gotcha.
+
+---
+
 ## Proactivity (scheduled)
 
 Cron jobs run *as the companion* and deliver to WhatsApp:
 
 | Job | Schedule | What |
 |---|---|---|
-| `companion-morning` | 7:30 AM daily | Warm good-morning, asks your focus, follows up on open threads |
-| `companion-evening` | 9:00 PM daily | Wind-down, how the day went, captures what's worth remembering |
+| `companion-morning` | 7:30 AM daily | Warm good-morning, asks your focus (memory-only) |
+| `companion-evening` | 9:00 PM daily | Wind-down, how the day went (memory-only) |
 | `morning-briefing` | 8:00 AM daily | (separate) AI/tech briefing with web search |
+
+> **Note:** the proactive crons are prompted to use **memory only** (no tool calls). Reason: once the companion got full exec, it would try to *check* calendar/email during a cron, which (under the old approval gate) hung until timeout and nothing delivered. Memory-only keeps them fast and reliable. Live calendar/email summaries in proactive messages are a future refinement.
 
 ```bash
 openclaw cron list                        # see jobs

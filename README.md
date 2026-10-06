@@ -10,8 +10,8 @@ This repository is the **documentation + future home** for the platform. Code ca
 
 ## What's in it
 
-- **Coding stack** — terminal + IDE agents backed by local models, with a cloud fallback ladder. → [docs/coding-stack.md](docs/coding-stack.md)
-- **Personal assistant** — a private, memory-rich companion on WhatsApp (Dot/Muse-style), only for the owner. → [docs/personal-assistant.md](docs/personal-assistant.md)
+- **Coding stack** — terminal + IDE agents backed by local models, with a free-model pool + cloud fallback ladder. → [docs/coding-stack.md](docs/coding-stack.md)
+- **Personal assistant** — a private, memory-rich companion on WhatsApp (Dot/Muse-style), only for the owner, with **full agentic access** (writes code + runs commands in any repo) and **live integrations** (GitHub, Gmail, Calendar, Notes/Reminders, Notion). → [docs/personal-assistant.md](docs/personal-assistant.md)
 - **One gateway** — every agent talks to a single OpenAI-compatible endpoint; routing, fallback, and context-compression happen behind it.
 
 ---

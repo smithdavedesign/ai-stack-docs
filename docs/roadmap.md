@@ -118,8 +118,19 @@ Integrations currently force the companion onto **paid `cloud-smart`** (free `cl
 - Cloud escape hatches (free OpenRouter + paid Anthropic), web search (patched)
 - Reboot-resilient auto-start for all services
 - Personal companion (persona + memory + proactive check-ins), cost-trimmed
+- **All requested integrations live & verified** — GitHub, Gmail, Calendar (macOS/icalBuddy), Notes/Reminders, Notion
+- **Full agentic access** for the companion — writes code + runs commands + spawns sub-agents in any repo (owner-granted, ungated)
+- **Free-model pool** (RepoHQ factory) — agentic coding across Ollama Cloud / OpenRouter / Gemini free tiers
+- **Vercel MCP** configured for Claude Code + OpenCode (OAuth activation pending)
 - Cross-session context: `CLAUDE.md`, Copilot instructions, Claude Code memory, `/ai-stack` skill
 - This documentation repo
+
+### Open / next
+- **Vercel deploy** — activate the MCP (OAuth) *or* issue a full-scope token (current token is read-only); then wire `/setup-deploy` + env vars
+- **Sentry** (error tracking) — `sentry-cli` installed; needs a DSN to integrate
+- **Event triggers** — polling-based GitHub dispatch (gateway is loopback, so no webhooks); confirm vs the RepoHQ factory
+- **Anthropic spend cap** — the companion runs on paid `cloud-smart`
+- **Security:** the full-exec companion reads untrusted content — keep it off untrusted inboxes/pages; perimeter (WhatsApp allowlist + loopback) is the only guard
 
 ---
 

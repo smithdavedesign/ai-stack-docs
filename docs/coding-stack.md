@@ -16,12 +16,19 @@ See [architecture](architecture.md) for diagrams.
 | `local-qwen3` | Qwen3-8B (`qwen3:8b`) | $0 | 32k* | General local reasoning |
 | `cloud-or` | `nvidia/nemotron-3-ultra-550b-a55b:free` via [OpenRouter](https://openrouter.ai) | **free** | 128k | Hard tasks, stay free (verbose; weak tool-calling) |
 | `cloud-smart` | `anthropic/claude-sonnet-4-6` via [Anthropic](https://console.anthropic.com) | **paid** | 200k | Top quality, reliable tool-calling |
+| `free-agent` / `-b` / `-c` | **Free pool**: Ollama Cloud (`nemotron-3-super`) · OpenRouter `:free` · Gemini (AI Studio) | **free** | varies | Agentic coding without exhausting one provider's quota |
+| `local-agent` / `local-small` | Qwen2.5-Coder-7B | $0 | 16k | Factory-scoped local edits |
 
 \* Context passed to Headroom, which compresses before the model's real window.
 
-**Fallback ladder:** `local-coder → cloud-or (free) → cloud-smart (paid)`, error-triggered only.
+**Free-model pool (RepoHQ factory):** `free-agent/-b/-c` spread agentic work across Ollama Cloud, OpenRouter, and Gemini free tiers so no single quota (e.g. OpenRouter's 50/day) runs dry. The pool members + fallback ladders are managed by `RepoHQ/factory/scout.ts`, which writes into **marker blocks** in `config.yaml` — don't hand-edit inside the `# >>> repohq-factory` markers. Keys: `OPENROUTER_API_KEY`, `OLLAMA_API_KEY`, `GEMINI_API_KEY` in `litellm/.env`.
+
+**Fallback ladders:** `local-coder → free-agent → free-agent-b → free-agent-c → cloud-smart` (free-first, paid only as last resort); `cloud-or → pool`.
 
 Config: `~/ai-stack/litellm/config.yaml` · reload with `docker compose -f ~/ai-stack/litellm/docker-compose.yml restart`.
+
+### Vercel MCP (deploy tooling for agents)
+Vercel's official MCP (`https://mcp.vercel.com`, OAuth) is configured for **Claude Code** (`~/.claude.json`) and **OpenCode** (`opencode.json`) — gives agents structured deploy/project/analytics tools. **Not** added to the WhatsApp companion (full-exec + untrusted content = too much to hand your Vercel account). Activate: restart the client, authorize via OAuth (`/mcp` in Claude Code). Token-based CLI deploys are blocked on this account (personal "northstar" account; CLI 54.9.1 team-enumeration quirk + read-scoped token) — use the MCP or a full-scope token.
 
 ---
 

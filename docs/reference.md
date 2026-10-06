@@ -27,6 +27,12 @@ Quick-lookup tables for ports, paths, models, secrets, and external docs.
 | `local-qwen3` | `qwen3:8b` | Ollama | $0 |
 | `cloud-or` | `nvidia/nemotron-3-ultra-550b-a55b:free` | OpenRouter | free |
 | `cloud-smart` | `anthropic/claude-sonnet-4-6` | Anthropic | paid |
+| `free-agent` | `nemotron-3-super` | Ollama Cloud | free |
+| `free-agent-b` | `cohere/north-mini-code:free` | OpenRouter | free |
+| `free-agent-c` | `gemini-3.6-flash` | Gemini (AI Studio) | free |
+| `local-agent` / `local-small` | `qwen2.5:7b-coding` | Ollama | $0 |
+
+> Free pool (`free-agent*`) is managed by `RepoHQ/factory/scout.ts` in marker blocks in `litellm/config.yaml` — don't hand-edit inside the markers.
 
 ---
 

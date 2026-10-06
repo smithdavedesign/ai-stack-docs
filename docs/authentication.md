@@ -58,16 +58,15 @@ Skills: `github`, `gh-issues`. Read is free; **writes (issues, PRs, comments) co
 ### Notion — ✅ ready
 Integration token already in `skills.entries.notion.apiKey`. Create/rotate at [notion.so/my-integrations](https://www.notion.so/my-integrations); share the pages/databases you want it to access with the integration.
 
-### Email (Gmail via himalaya)
-IMAP/SMTP with a **Gmail App Password** (not your login password):
-1. Enable 2FA on the Google account.
-2. Create an App Password: [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords).
-3. Put it in `~/.config/himalaya/config.toml` (IMAP `imap.gmail.com:993`, SMTP `smtp.gmail.com:465`). App passwords don't expire → service-account-like.
+### Email (Gmail via himalaya) — ✅ live
+IMAP/SMTP with a **Gmail App Password** in `~/.config/himalaya/config.toml` (IMAP `imap.gmail.com:993`, SMTP `smtp.gmail.com:465`). Verified (inbox listed). App passwords don't expire → service-account-like.
+> **GOTCHA:** App Passwords copied from Google's UI contain **non-breaking spaces** (`U+00A0`), not regular spaces — the value looks 16-char but is really 19. Strip **all** non-alphanumerics down to the 16 real letters (a regular-space strip isn't enough).
 
-### Google Calendar — 🧭 gap
-No bundled skill (OpenClaw ships email via IMAP, not a Google Calendar skill). Options:
-- Install a calendar skill (requires re-enabling `clawhub` — currently excluded from `plugins.allow`), or
-- Add a small MCP/skill backed by a **Google OAuth app in production mode** (offline refresh token → stays authenticated).
+### Google Calendar — ✅ live (macOS/EventKit, no OAuth)
+Solved natively via **`icalBuddy`** (reads macOS/EventKit calendars; add events via Calendar.app) — **no Google OAuth or app needed**. Any Google calendar you add in macOS **System Settings → Internet Accounts** syncs in automatically. (`gcalcli` is also installed if you ever want Google-native OAuth instead.)
+
+### Slack — 🧭 (bundled skill available, not in original ask)
+`slack` skill is bundled; needs a Slack app/bot token (xoxb-…). Long-lived. Good for work-context automation (what OpenAI Dots use).
 
 ### Slack — 🧭 (bundled skill available)
 `slack` skill is bundled; needs a Slack app/bot token (xoxb-…). Long-lived. Good for work-context automation (what OpenAI Dots use).
