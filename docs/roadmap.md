@@ -122,12 +122,14 @@ Integrations currently force the companion onto **paid `cloud-smart`** (free `cl
 - **Full agentic access** for the companion — writes code + runs commands + spawns sub-agents in any repo (owner-granted, ungated)
 - **Free-model pool** (RepoHQ factory) — agentic coding across Ollama Cloud / OpenRouter / Gemini free tiers
 - **Vercel MCP** configured for Claude Code + OpenCode (OAuth activation pending)
-- **RepoHQ factory front door (OpenClaw side)** — `~/ai-stack/repohq/frontdoor.py` (enqueue/report/status) + `CONTRACT.md` + companion dispatch + 15-min report scheduler. Message "work on repo X" → queued owner-request → (factory) → draft PR → WhatsApp. Unit-tested (6/6). Lives outside the factory code (zero conflict).
+- **RepoHQ factory front door — both sides** — message "work on repo X" → **draft PR → WhatsApp**, end to end.
+  - *OpenClaw side:* `~/ai-stack/repohq/frontdoor.py` (enqueue/report/status) + `CONTRACT.md` + companion dispatch + 15-min report scheduler. Unit-tested (8/8).
+  - *Factory side* (branch `feat/owner-requested-frontdoor`): new `owner-requested` task kind runs through the one governed path — sandbox → free-pool → judge → draft PR (labeled `owner-requested`, never auto-merged) → ledger. Free-form gate = the judge's generic rules (checks pass, no regression, diff ≤ 400 lines, no CI/secret/lockfile edits, no test gutting). `factory/lib/owner-requests.ts` + hooks in `run.ts`/`tasks.ts`/`config.ts`/`ledger.ts`; `verify.ts` unchanged. Unit-tested; all existing factory tests still pass. Capability defaults to `report` (a dry run: runs sandbox+judge, holds the PR, reports "verified") — promote to `pr` after a clean night to open labeled draft PRs.
 - Cross-session context: `CLAUDE.md`, Copilot instructions, Claude Code memory, `/ai-stack` skill
 - This documentation repo
 
 ### Open / next
-- **RepoHQ factory side of the front door** — consume `queue/owner-requests.jsonl`, run as `owner-requested` task through sandbox + judge, label the draft PR, write `ownerTaskId` to the ledger. **Owned by the factory's in-flight phases**: Judge free-form gate → **Phase 77 (Judge v2)**; owner-requests as a work source → **Phase 78**; `ownerTaskId`/KPIs → **Phase 79**. Spec: `~/ai-stack/repohq/CONTRACT.md`.
+- **Merge the factory front-door branch** — `feat/owner-requested-frontdoor` is implemented + tested (not merged to `main`, which the nightly uses). Review the diff, then merge; the first owner request will open a labeled draft PR on the next cycle.
 - **Vercel deploy** — activate the MCP (OAuth) *or* issue a full-scope token (current token is read-only); then wire `/setup-deploy` + env vars
 - **Sentry** (error tracking) — `sentry-cli` installed; needs a DSN to integrate
 - **Event triggers** — the RepoHQ front door is the owner-initiated path; automated triggers (red CI, security alerts, stale PRs) are **Phase 78** in the factory
