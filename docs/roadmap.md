@@ -122,13 +122,15 @@ Integrations currently force the companion onto **paid `cloud-smart`** (free `cl
 - **Full agentic access** for the companion — writes code + runs commands + spawns sub-agents in any repo (owner-granted, ungated)
 - **Free-model pool** (RepoHQ factory) — agentic coding across Ollama Cloud / OpenRouter / Gemini free tiers
 - **Vercel MCP** configured for Claude Code + OpenCode (OAuth activation pending)
+- **RepoHQ factory front door (OpenClaw side)** — `~/ai-stack/repohq/frontdoor.py` (enqueue/report/status) + `CONTRACT.md` + companion dispatch + 15-min report scheduler. Message "work on repo X" → queued owner-request → (factory) → draft PR → WhatsApp. Unit-tested (6/6). Lives outside the factory code (zero conflict).
 - Cross-session context: `CLAUDE.md`, Copilot instructions, Claude Code memory, `/ai-stack` skill
 - This documentation repo
 
 ### Open / next
+- **RepoHQ factory side of the front door** — consume `queue/owner-requests.jsonl`, run as `owner-requested` task through sandbox + judge, label the draft PR, write `ownerTaskId` to the ledger. **Owned by the factory's in-flight phases**: Judge free-form gate → **Phase 77 (Judge v2)**; owner-requests as a work source → **Phase 78**; `ownerTaskId`/KPIs → **Phase 79**. Spec: `~/ai-stack/repohq/CONTRACT.md`.
 - **Vercel deploy** — activate the MCP (OAuth) *or* issue a full-scope token (current token is read-only); then wire `/setup-deploy` + env vars
 - **Sentry** (error tracking) — `sentry-cli` installed; needs a DSN to integrate
-- **Event triggers** — polling-based GitHub dispatch (gateway is loopback, so no webhooks); confirm vs the RepoHQ factory
+- **Event triggers** — the RepoHQ front door is the owner-initiated path; automated triggers (red CI, security alerts, stale PRs) are **Phase 78** in the factory
 - **Anthropic spend cap** — the companion runs on paid `cloud-smart`
 - **Security:** the full-exec companion reads untrusted content — keep it off untrusted inboxes/pages; perimeter (WhatsApp allowlist + loopback) is the only guard
 
