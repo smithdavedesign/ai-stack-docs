@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/coding-stack.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/coding-stack.md). This copy is no longer updated.
+
 # Coding Stack
 
 Local-first coding with a cloud fallback ladder, exposed through one endpoint.

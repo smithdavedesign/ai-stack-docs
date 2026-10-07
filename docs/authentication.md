@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/authentication.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/authentication.md). This copy is no longer updated.
+
 # Authentication & Integrations
 
 How the assistant authenticates to each service, and how to keep it logged in **like a service account** — set once, never re-auth (mostly).

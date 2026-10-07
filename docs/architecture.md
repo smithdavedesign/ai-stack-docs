@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/architecture.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/architecture.md). This copy is no longer updated.
+
 # Architecture
 
 Diagrams for the whole platform. All render natively on GitHub (Mermaid).

@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/reference.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/reference.md). This copy is no longer updated.
+
 # Reference
 
 Quick-lookup tables for ports, paths, models, secrets, and external docs.

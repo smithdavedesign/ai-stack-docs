@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/personal-assistant.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/personal-assistant.md). This copy is no longer updated.
+
 # Personal Assistant (Companion)
 
 A private, memory-rich personal companion — Dot/Muse-style, but **self-hosted and only for the owner**. Built on [OpenClaw](https://docs.openclaw.ai), reachable on WhatsApp, powered by Claude (`cloud-smart`).

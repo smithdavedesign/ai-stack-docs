@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/roadmap.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/roadmap.md). This copy is no longer updated.
+
 # Roadmap
 
 Where the platform is headed. Organized by horizon, not hard dates. Honest about effort, value, and what's deliberately *not* being done.

@@ -1,3 +1,5 @@
+> **Moved** to [Github-HQ/docs/ai-stack/operations.md](https://github.com/smithdavedesign/Github-HQ/blob/main/docs/ai-stack/operations.md). This copy is no longer updated.
+
 # Operations Runbook
 
 Day-to-day operation, health checks, recovery, and the hard-won gotchas.
